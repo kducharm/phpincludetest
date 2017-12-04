@@ -90,7 +90,7 @@ if (count($argv) < 2) {
   echo " -m: Run memory test + include test\n";
   exit;
 }
-$options = getopt('m');
+$options = getopt('mo');
 
 if (count($options)) {
   $env = $argv[2];
@@ -99,6 +99,8 @@ else {
   $env = $argv[1];
 }
 
+$ini_settings = ini_get_all();
+echo "PHP Opcache Enabled: " . $ini_settings['opcache.enable_cli']['global_value'] . "\n";
 ini_set("precision", 16);
 ini_set("memory_limit", "256M");
 $test_obj = new PhpIncludeTest();
